@@ -267,8 +267,8 @@ export function InventoryDashboard() {
         <TabsList>
           <TabsTrigger value="inventory">Inventory</TabsTrigger>
           <TabsTrigger value="add-product">Add Product</TabsTrigger>
-          <TabsTrigger value="add-brand">Add Brand</TabsTrigger> {/* Add this line */}
-          <TabsTrigger value="add-type">Add Type</TabsTrigger> {/* Add this line */}
+          <TabsTrigger value="add-brand">Add Brand</TabsTrigger>
+          <TabsTrigger value="add-type">Add Type</TabsTrigger>
         </TabsList>
         <TabsContent value="inventory" className="space-y-4">
           <Card>
@@ -281,7 +281,7 @@ export function InventoryDashboard() {
                 products={products}
                 loading={loading}
                 onDelete={handleDeleteProduct}
-                onUpdateQuantity={handleUpdateQuantity} // Add this line
+                onUpdateQuantity={handleUpdateQuantity}
               />
             </CardContent>
           </Card>
@@ -301,7 +301,7 @@ export function InventoryDashboard() {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="add-brand" className="space-y-4"> {/* Add this block */}
+        <TabsContent value="add-brand" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Add New Brand</CardTitle>
@@ -312,7 +312,7 @@ export function InventoryDashboard() {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="add-type" className="space-y-4"> {/* Add this block */}
+        <TabsContent value="add-type" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Add New Type</CardTitle>
