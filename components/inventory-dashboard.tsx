@@ -115,7 +115,12 @@ export function InventoryDashboard() {
 
       // Increment the Pid for the new product
       const newPid = latestProduct ? latestProduct.Pid + 1 : 1
-      const newProductData = { ...productData, Pid: newPid }
+
+      // Combine brand name and product name
+      const combinedProductName = productData.Brand ? `${productData.Brand} ${productData.Product}`.trim() : productData.Product
+
+      // Create new product data with combined product name
+      const newProductData = { ...productData, Pid: newPid, Product: combinedProductName }
 
       // Insert the new product with the incremented Pid
       const { data, error } = await supabase.from("Products").insert([newProductData]).select()
