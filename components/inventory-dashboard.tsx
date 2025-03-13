@@ -287,6 +287,7 @@ export function InventoryDashboard() {
                 loading={loading}
                 onDelete={handleDeleteProduct}
                 onUpdateQuantity={handleUpdateQuantity}
+                setProducts={setProducts}
               />
             </CardContent>
           </Card>

@@ -29,6 +29,7 @@ export function ProductForm({ brands, productTypes, onSubmit }: ProductFormProps
     Quantity: 0,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -56,17 +57,25 @@ export function ProductForm({ brands, productTypes, onSubmit }: ProductFormProps
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
+
+    // Convert numeric fields
+    const productData = {
+      ...formData,
+      Mrp: Number.parseFloat(formData.Mrp),
+      Sp: Number.parseFloat(formData.Sp),
+      Tid: Number.parseInt(formData.Tid),
+      Bid: Number.parseInt(formData.Bid),
+    }
+
+    // Validation: Check if selling price is less than MRP
+    if (productData.Sp >= productData.Mrp) {
+      setError("Selling price must be less than MRP.")
+      setIsSubmitting(false)
+      return
+    }
 
     try {
-      // Convert numeric fields
-      const productData = {
-        ...formData,
-        Mrp: Number.parseFloat(formData.Mrp),
-        Sp: Number.parseFloat(formData.Sp),
-        Tid: Number.parseInt(formData.Tid),
-        Bid: Number.parseInt(formData.Bid),
-      }
-
       await onSubmit(productData)
 
       // Reset form after successful submission
@@ -90,6 +99,7 @@ export function ProductForm({ brands, productTypes, onSubmit }: ProductFormProps
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && <div className="text-red-500">{error}</div>}
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="Product">Product Name</Label>
