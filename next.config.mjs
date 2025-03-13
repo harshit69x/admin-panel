@@ -15,11 +15,27 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'sysytlpmmbguerybcyvw.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
   },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
+    serverActions: true,
+  },
+  // Disable webpack5 for better compatibility
+  webpack5: false,
+  // Add custom webpack configuration if needed
+  webpack: (config, { isServer }) => {
+    // Add any custom webpack configurations here
+    return config
   },
 }
 
